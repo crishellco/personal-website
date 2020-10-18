@@ -1,7 +1,7 @@
 {
-  "name": "crishellco",
+  "name": "personal-website",
   "version": "1.0.0",
-  "description": "My astonishing Nuxt.js project",
+  "description": "",
   "author": "Chris Mitchell",
   "private": true,
   "scripts": {

@@ -9,27 +9,28 @@
           >Chris Mitchell</nuxt-link
         >
         <div>
-          Principal Software Engineer, Architect @ RMS
+          Principal Software Engineer, Architect @
+          <a class="hover:underline" href="www.rms.com" target="_blank">RMS</a>
         </div>
         <div class="text-xs">
           <a
             target="_blank"
             href="http://github.com/crishellco"
-            class="text-gray-600 hover:text-gray-900
+            class="text-gray-800 hover:underline
           "
             >GitHub</a
           >
           <a
             target="_blank"
             href="https://www.linkedin.com/in/crishellco/"
-            class="text-gray-600 hover:text-gray-900 mx-2
+            class="text-gray-800 hover:underline mx-2
           "
             >LinkedIn</a
           >
           <a
             target="_blank"
             href="https://twitter.com/crishellco"
-            class="text-gray-600 hover:text-gray-900
+            class="text-gray-800 hover:underline
           "
             >Twitter</a
           >
