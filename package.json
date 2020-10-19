@@ -1,7 +1,7 @@
 {
   "name": "personal-website",
   "version": "1.0.0",
-  "description": "",
+  "description": "Personal website of Chris Mitchell. Principal Engineer and Architect @ RMS.",
   "author": "Chris Mitchell",
   "private": true,
   "scripts": {
@@ -15,7 +15,8 @@
     "@nuxt/content": "^1.10.0",
     "iframe-resizer": "^4.2.11",
     "nuxt": "^2.0.0",
-    "vue-embed-gist": "^1.1.0"
+    "vue-embed-gist": "^1.1.0",
+    "vue-meta": "^2.4.0"
   },
   "devDependencies": {
     "@nuxtjs/date-fns": "^1.4.0",

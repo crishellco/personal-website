@@ -9,12 +9,6 @@
         {{ $dateFns.format(new Date(article.createdAt), 'MMMM do, u') }}
       </div>
       <nuxt-content :document="article"></nuxt-content>
-      <!-- <nuxt-link
-        :to="{ name: 'articles-slug', params: { slug: article.slug } }"
-        class="text-gray-700 text-sm hover:text-gray-900"
-      >
-        Read this article &rarr;
-      </nuxt-link> -->
     </article>
   </section>
 </template>
@@ -25,6 +19,43 @@ export default {
     const article = await $content('articles', params.slug).fetch()
 
     return { article }
+  },
+
+  head() {
+    const article = this.article
+
+    return {
+      title: `${article.title} | Chris Mitchell`,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: article.description
+        },
+        {
+          name: 'twitter:card',
+          content: 'summary'
+        },
+        {
+          name: 'twitter:site',
+          content: '@crishellco'
+        },
+        {
+          name: 'twitter:creator',
+          content: '@crishellco'
+        },
+        {
+          name: 'twitter:title',
+          content: `${article.title} | Chris Mitchell`
+        },
+        {
+          name: 'twitter:description',
+          content: article.description
+        }
+      ]
+    }
   }
 }
 </script>
