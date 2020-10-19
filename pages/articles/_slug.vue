@@ -35,23 +35,23 @@ export default {
           content: article.description
         },
         {
-          name: 'twitter:card',
-          content: 'summary'
+          property: 'twitter:card',
+          name: 'summary'
         },
         {
-          name: 'twitter:site',
+          property: 'twitter:site',
           content: '@crishellco'
         },
         {
-          name: 'twitter:creator',
+          property: 'twitter:creator',
           content: '@crishellco'
         },
         {
-          name: 'twitter:title',
+          property: 'twitter:title',
           content: `${article.title} | Chris Mitchell`
         },
         {
-          name: 'twitter:description',
+          property: 'twitter:description',
           content: article.description
         }
       ]
