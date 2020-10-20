@@ -59,9 +59,9 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
 
-    '@nuxtjs/date-fns',
+    '@nuxtjs/date-fns'
 
-    '@nuxtjs/dotenv'
+    // '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
@@ -72,7 +72,14 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          projectId: 'crishellco-personal-website'
+          apiKey: process.env.FB_API_KEY,
+          authDomain: 'crishellco-personal-website.firebaseapp.com',
+          databaseURL: 'https://crishellco-personal-website.firebaseio.com',
+          projectId: 'crishellco-personal-website',
+          storageBucket: 'crishellco-personal-website.appspot.com',
+          messagingSenderId: '235801148140',
+          appId: '1:235801148140:web:cc05e55b9d1fbd4e6ac3c9',
+          measurementId: 'G-43B3GECECK'
         },
         services: {
           firestore: true // Just as example. Can be any other service.
