@@ -1,6 +1,6 @@
 ---
 title: 'Vuelidate: Effortless Error Messaging'
-description: 'How I used renderless components to make Vuelidate form error messages simple, decoupled, and reusable.'
+description: 'This article shows how I was able to use a renderless component to make Vuelidate form error messages simple, decoupled, and reusable.'
 createdAt: '2019-10-24 00:00:00'
 ---
 
