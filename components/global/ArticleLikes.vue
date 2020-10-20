@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-center relative">
+    <div v-if="!loading" class="flex items-center relative">
       <span
         class="material-icons cursor-pointer hover:text-gray-700"
         @click="like"
@@ -30,6 +30,7 @@ export default {
     return {
       likes: [],
       localLikes: [],
+      loading: true,
       showAnimation: false
     }
   },
@@ -51,10 +52,9 @@ export default {
     },
 
     async like() {
-      const likes = this.localLikes
-
       this.showAnimation = true
       this.likes.push({})
+      this.storeLocalLike()
 
       await this.$fireStore.collection('likes').add({
         slug: this.article.slug,
@@ -62,13 +62,6 @@ export default {
           representation: 'date'
         })
       })
-
-      if (!this.isLiked) {
-        localStorage.setItem(
-          'crishellco-likes',
-          JSON.stringify(likes.concat(this.article.slug))
-        )
-      }
 
       this.getLikes()
     },
@@ -80,6 +73,18 @@ export default {
         .get()
 
       this.likes = results.docs
+      this.getLocalLikes()
+      this.loading = false
+    },
+
+    storeLocalLike() {
+      const likes = this.localLikes
+
+      localStorage.setItem(
+        'crishellco-likes',
+        JSON.stringify(Array.from(new Set(likes.concat(this.article.slug))))
+      )
+
       this.getLocalLikes()
     }
   }

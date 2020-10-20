@@ -2,14 +2,11 @@
   <section class="max-w-article pb-10">
     <article class="mt-8">
       <h2 class="text-3xl font-semibold">{{ article.title }}</h2>
-      <div
-        class="mb-6 text-sm text-gray-700
-      "
-      >
+      <div class="mb-6 text-sm text-gray-700 flex items-center">
         <formatted-date :article="article" />
-        <span>&centerdot;</span>
+        <span class="mx-1">&centerdot;</span>
         <read-time :article="article" />
-        <span>&centerdot;</span>
+        <span class="mx-1">&centerdot;</span>
         <nuxt-link to="/">Back to articles</nuxt-link>
       </div>
       <div ref="content">

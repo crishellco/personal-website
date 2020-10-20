@@ -5,13 +5,12 @@
       class="text-xl font-semibold"
       >{{ article.title }}</nuxt-link
     >
-    <div
-      class="mb-4 text-sm text-gray-700
-      "
-    >
+    <div class="mb-4 text-sm text-gray-700 flex items-center">
       <formatted-date :article="article" />
-      <span>&centerdot;</span>
+      <span class="mx-1">&centerdot;</span>
       <read-time :article="article" />
+      <span class="mx-1">&centerdot;</span>
+      <article-likes-preview :article="article" />
     </div>
     <p class="my-2">{{ article.description }}</p>
   </article>
