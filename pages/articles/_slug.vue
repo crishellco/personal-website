@@ -10,6 +10,19 @@
       </div>
       <nuxt-content :document="article"></nuxt-content>
     </article>
+    <div class="flex items-center border-t pt-4">
+      <span v-if="isLiked" class="material-icons">
+        favorite
+      </span>
+      <span
+        v-else
+        class="material-icons cursor-pointer hover:text-gray-700"
+        @click="like"
+      >
+        favorite_border
+      </span>
+      <span class="text-sm ml-2">{{ likes.length }} likes</span>
+    </div>
   </section>
 </template>
 
@@ -21,36 +34,91 @@ export default {
     return { article }
   },
 
+  data() {
+    return {
+      likes: [],
+      localLikes: []
+    }
+  },
+  computed: {
+    isLiked() {
+      return this.localLikes.includes(this.article.slug)
+    }
+  },
+
+  mounted() {
+    this.getLikes()
+  },
+
+  methods: {
+    getLocalLikes() {
+      this.localLikes =
+        JSON.parse(localStorage.getItem('crishellco-likes')) || []
+    },
+
+    async like() {
+      if (this.isLiked) {
+        return
+      }
+
+      const likes = this.localLikes
+
+      await this.$fireStore.collection('likes').add({
+        slug: this.article.slug,
+        liked_at: this.$dateFns.formatISO(new Date(), {
+          representation: 'date'
+        })
+      })
+
+      localStorage.setItem(
+        'crishellco-likes',
+        JSON.stringify(likes.concat(this.article.slug))
+      )
+
+      this.getLikes()
+    },
+
+    async getLikes() {
+      const results = await this.$fireStore
+        .collection('likes')
+        .where('slug', '==', this.article.slug)
+        .get()
+
+      this.likes = results.docs
+      this.getLocalLikes()
+    }
+  },
+
   head() {
-    const article = this.article
+    const { description, title } = this.article
 
     return {
-      title: `${article.title} | Chris Mitchell`,
+      title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: article.description
+          content: description
         },
         {
-          name: 'twitter:card',
+          property: 'twitter:card',
           content: 'summary'
         },
         {
-          name: 'twitter:site',
+          property: 'twitter:site',
           content: '@crishellco'
         },
         {
-          name: 'twitter:creator',
+          property: 'twitter:creator',
           content: '@crishellco'
         },
         {
-          name: 'twitter:title',
-          content: `${article.title} | Chris Mitchell`
+          property: 'twitter:title',
+          content: `${title} | Chris Mitchell`
         },
         {
-          name: 'twitter:description',
-          content: article.description
+          property: 'twitter:description',
+          content: description
         }
       ]
     }

@@ -17,6 +17,10 @@ export default {
       .fetch()
 
     return { articles }
+  },
+
+  head: {
+    title: 'Articles'
   }
 }
 </script>

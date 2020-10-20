@@ -21,6 +21,7 @@ export default {
    */
   head: {
     title: 'Chris Mitchell',
+    titleTemplate: '%s - Chris Mitchell',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -29,7 +30,13 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -52,12 +59,27 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
 
-    '@nuxtjs/date-fns'
+    '@nuxtjs/date-fns',
+
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxt/content'],
+  modules: [
+    '@nuxt/content',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          projectId: 'crishellco-personal-website'
+        },
+        services: {
+          firestore: true // Just as example. Can be any other service.
+        }
+      }
+    ]
+  ],
   /*
    ** Build configuration
    */
