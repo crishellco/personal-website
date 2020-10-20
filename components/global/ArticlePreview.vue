@@ -5,13 +5,15 @@
       class="text-xl font-semibold"
       >{{ article.title }}</nuxt-link
     >
-    <p class="my-2">{{ article.description }}</p>
-    <nuxt-link
-      :to="{ name: 'articles-slug', params: { slug: article.slug } }"
-      class="text-sm"
+    <div
+      class="mb-4 text-sm text-gray-700
+      "
     >
-      Read this article &rarr;
-    </nuxt-link>
+      <formatted-date :article="article" />
+      <span>&centerdot;</span>
+      <read-time :article="article" />
+    </div>
+    <p class="my-2">{{ article.description }}</p>
   </article>
 </template>
 

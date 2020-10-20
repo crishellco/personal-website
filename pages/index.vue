@@ -12,7 +12,7 @@
 <script>
 export default {
   async asyncData({ $content, params, error }) {
-    const articles = await $content('articles')
+    const articles = await $content('articles', { text: true })
       .sortBy('createdAt', 'desc')
       .fetch()
 

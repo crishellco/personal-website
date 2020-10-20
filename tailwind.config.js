@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       maxWidth: {
-        'article-list': '65rem'
+        'article-list': '35rem',
+        article: '65rem'
       }
     }
   },

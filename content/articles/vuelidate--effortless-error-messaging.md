@@ -1,6 +1,6 @@
 ---
 title: 'Vuelidate: Effortless Error Messaging'
-description: Human-readable error messages using renderless components.
+description: 'How I used renderless components to make Vuelidate form error messages simple, decoupled, and reusable.'
 createdAt: '2019-10-24 00:00:00'
 ---
 
