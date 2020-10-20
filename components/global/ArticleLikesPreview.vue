@@ -10,7 +10,11 @@
 </template>
 
 <script>
+import localLikes from '~/mixins/local-likes'
+
 export default {
+  mixins: [localLikes],
+
   props: {
     article: {
       required: true,
@@ -21,14 +25,7 @@ export default {
   data() {
     return {
       likes: [],
-      loading: true,
-      localLikes: []
-    }
-  },
-
-  computed: {
-    isLiked() {
-      return this.localLikes.includes(this.article.slug)
+      loading: true
     }
   },
 
@@ -37,11 +34,6 @@ export default {
   },
 
   methods: {
-    getLocalLikes() {
-      this.localLikes =
-        JSON.parse(localStorage.getItem('crishellco-likes')) || []
-    },
-
     async getLikes() {
       const results = await this.$fireStore
         .collection('likes')
@@ -49,7 +41,6 @@ export default {
         .get()
 
       this.likes = results.docs
-      this.getLocalLikes()
       this.loading = false
     }
   }

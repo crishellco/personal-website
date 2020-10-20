@@ -1,14 +1,25 @@
 <template>
   <div>
     <div v-if="!loading" class="flex items-center relative">
-      <span
-        class="material-icons cursor-pointer hover:text-gray-700"
+      <div
+        class="relative cursor-pointer group"
+        style="line-height: 0;"
         @click="like"
       >
-        {{ isLiked ? 'favorite' : 'favorite_border' }}
-      </span>
+        <span class="material-icons group-hover:text-gray-700 text-3xl">
+          {{ isLiked ? 'favorite' : 'favorite_border' }}
+        </span>
+        <span
+          v-if="isLiked"
+          class="text-white text-2xs absolute top-0 left-0 w-full h-full flex items-center justify-center"
+          >{{ countLocalLikes }}</span
+        >
+      </div>
       <transition name="fade-up" @after-enter="showAnimation = false">
-        <span v-if="showAnimation" class="material-icons absolute left-0 top-0">
+        <span
+          v-if="showAnimation"
+          class="material-icons absolute left-0 top-0 text-3xl"
+        >
           favorite
         </span>
       </transition>
@@ -18,7 +29,11 @@
 </template>
 
 <script>
+import localLikes from '~/mixins/local-likes'
+
 export default {
+  mixins: [localLikes],
+
   props: {
     article: {
       required: true,
@@ -29,15 +44,8 @@ export default {
   data() {
     return {
       likes: [],
-      localLikes: [],
       loading: true,
       showAnimation: false
-    }
-  },
-
-  computed: {
-    isLiked() {
-      return this.localLikes.includes(this.article.slug)
     }
   },
 
@@ -46,11 +54,6 @@ export default {
   },
 
   methods: {
-    getLocalLikes() {
-      this.localLikes =
-        JSON.parse(localStorage.getItem('crishellco-likes')) || []
-    },
-
     async like() {
       this.showAnimation = true
       this.likes.push({})
@@ -73,19 +76,7 @@ export default {
         .get()
 
       this.likes = results.docs
-      this.getLocalLikes()
       this.loading = false
-    },
-
-    storeLocalLike() {
-      const likes = this.localLikes
-
-      localStorage.setItem(
-        'crishellco-likes',
-        JSON.stringify(Array.from(new Set(likes.concat(this.article.slug))))
-      )
-
-      this.getLocalLikes()
     }
   }
 }
@@ -93,7 +84,7 @@ export default {
 
 <style scoped>
 .fade-up-enter-active {
-  animation: fade-up 0.5s ease;
+  animation: fade-up 0.3s ease;
 }
 .fade-up-leave-active {
   opacity: 0;
@@ -103,7 +94,7 @@ export default {
     opacity: 1;
   }
   100% {
-    transform: translateY(-100%);
+    transform: scale(1.2) translateY(-75%);
     opacity: 0;
   }
 }

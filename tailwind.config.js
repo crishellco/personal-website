@@ -10,9 +10,14 @@ module.exports = {
       maxWidth: {
         'article-list': '35rem',
         article: '65rem'
+      },
+      fontSize: {
+        '2xs': '.6rem'
       }
     }
   },
-  variants: {},
+  variants: {
+    textColor: ['hover', 'group-hover']
+  },
   plugins: []
 }
