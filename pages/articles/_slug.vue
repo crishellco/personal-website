@@ -11,28 +11,25 @@
         }}</span>
         <span>&centerdot;</span>
         <span>{{ readTime }}</span>
+        <span>&centerdot;</span>
+        <nuxt-link to="/">Back to articles</nuxt-link>
       </div>
       <div ref="content">
         <nuxt-content :document="article"></nuxt-content>
       </div>
     </article>
-    <div class="flex items-center border-t pt-4">
-      <div class="relative">
-        <span
-          class="material-icons cursor-pointer hover:text-gray-700"
-          @click="like"
-        >
-          {{ isLiked ? 'favorite' : 'favorite_border' }}
+    <div class="flex items-center border-t pt-4 relative">
+      <span
+        class="material-icons cursor-pointer hover:text-gray-700"
+        @click="like"
+      >
+        {{ isLiked ? 'favorite' : 'favorite_border' }}
+      </span>
+      <transition name="fade-up" @after-enter="showAnimation = false">
+        <span v-if="showAnimation" class="material-icons absolute left-0 top-0">
+          favorite
         </span>
-        <transition name="fade-up" @after-enter="showAnimation = false">
-          <span
-            v-if="showAnimation"
-            class="material-icons absolute left-0 top-0"
-          >
-            favorite
-          </span>
-        </transition>
-      </div>
+      </transition>
       <span class="text-sm ml-2">{{ likes.length }} likes</span>
     </div>
   </section>
