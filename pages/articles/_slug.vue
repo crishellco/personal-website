@@ -22,7 +22,11 @@
 
 <script>
 export default {
-  async asyncData({ $content, params, error }) {
+  async asyncData({ $content, params, error, payload }) {
+    if (payload) {
+      return { articles: payload }
+    }
+
     const article = await $content('articles', params.slug, {
       text: true
     }).fetch()
@@ -42,23 +46,23 @@ export default {
           content: description
         },
         {
-          property: 'twitter:card',
+          name: 'twitter:card',
           content: 'summary'
         },
         {
-          property: 'twitter:site',
+          name: 'twitter:site',
           content: '@crishellco'
         },
         {
-          property: 'twitter:creator',
+          name: 'twitter:creator',
           content: '@crishellco'
         },
         {
-          property: 'twitter:title',
+          name: 'twitter:title',
           content: `${title} | Chris Mitchell`
         },
         {
-          property: 'twitter:description',
+          name: 'twitter:description',
           content: description
         }
       ]

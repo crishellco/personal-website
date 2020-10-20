@@ -8,11 +8,14 @@ export default {
   generate: {
     async routes() {
       const { $content } = require('@nuxt/content')
-      const files = await $content({ deep: true })
-        .only(['path'])
-        .fetch()
+      const articles = await $content({ deep: true }).fetch()
 
-      return files.map((file) => (file.path === '/index' ? '/' : file.path))
+      return articles.map((article) => {
+        return {
+          route: article.path === '/index' ? '/' : article.path,
+          payload: article
+        }
+      })
     }
   },
 
@@ -20,12 +23,13 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'Chris Mitchell',
+    title: 'Home',
     titleTemplate: '%s - Chris Mitchell',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
+        hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
       }
