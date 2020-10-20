@@ -6,27 +6,41 @@
         class="mb-6 text-sm text-gray-700
       "
       >
-        {{ $dateFns.format(new Date(article.createdAt), 'MMMM do, u') }}
+        <span>{{
+          $dateFns.format(new Date(article.createdAt), 'MMMM do, u')
+        }}</span>
+        <span>&centerdot;</span>
+        <span>{{ readTime }}</span>
       </div>
-      <nuxt-content :document="article"></nuxt-content>
+      <div ref="content">
+        <nuxt-content :document="article"></nuxt-content>
+      </div>
     </article>
     <div class="flex items-center border-t pt-4">
-      <span v-if="isLiked" class="material-icons">
-        favorite
-      </span>
-      <span
-        v-else
-        class="material-icons cursor-pointer hover:text-gray-700"
-        @click="like"
-      >
-        favorite_border
-      </span>
+      <div class="relative">
+        <span
+          class="material-icons cursor-pointer hover:text-gray-700"
+          @click="like"
+        >
+          {{ isLiked ? 'favorite' : 'favorite_border' }}
+        </span>
+        <transition name="fade-up" @after-enter="showAnimation = false">
+          <span
+            v-if="showAnimation"
+            class="material-icons absolute left-0 top-0"
+          >
+            favorite
+          </span>
+        </transition>
+      </div>
       <span class="text-sm ml-2">{{ likes.length }} likes</span>
     </div>
   </section>
 </template>
 
 <script>
+import readTimeEstimate from 'read-time-estimate'
+
 export default {
   async asyncData({ $content, params, error }) {
     const article = await $content('articles', params.slug).fetch()
@@ -37,9 +51,12 @@ export default {
   data() {
     return {
       likes: [],
-      localLikes: []
+      localLikes: [],
+      readTime: '',
+      showAnimation: false
     }
   },
+
   computed: {
     isLiked() {
       return this.localLikes.includes(this.article.slug)
@@ -48,20 +65,45 @@ export default {
 
   mounted() {
     this.getLikes()
+    this.observe()
   },
 
   methods: {
+    observe() {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          this.calculateReadTime()
+        })
+      })
+      observer.observe(this.$refs.content, {
+        attributes: true,
+        childList: true,
+        subtree: true
+      })
+    },
+
     getLocalLikes() {
       this.localLikes =
         JSON.parse(localStorage.getItem('crishellco-likes')) || []
     },
 
-    async like() {
-      if (this.isLiked) {
-        return
-      }
+    calculateReadTime() {
+      const data = readTimeEstimate(
+        this.$refs.content.innerHTML,
+        275,
+        12,
+        500,
+        ['img', 'Image', 'iframe']
+      )
 
+      this.readTime = `${Math.ceil(data.duration)} min read`
+    },
+
+    async like() {
       const likes = this.localLikes
+
+      this.showAnimation = true
+      this.likes.push({})
 
       await this.$fireStore.collection('likes').add({
         slug: this.article.slug,
@@ -70,10 +112,12 @@ export default {
         })
       })
 
-      localStorage.setItem(
-        'crishellco-likes',
-        JSON.stringify(likes.concat(this.article.slug))
-      )
+      if (!this.isLiked) {
+        localStorage.setItem(
+          'crishellco-likes',
+          JSON.stringify(likes.concat(this.article.slug))
+        )
+      }
 
       this.getLikes()
     },
@@ -135,5 +179,20 @@ export default {
 }
 .nuxt-content ol {
   @apply list-decimal ml-4 my-4 pl-4;
+}
+</style>
+
+<style scoped>
+.fade-up-enter-active {
+  animation: fade-up 0.5s ease;
+}
+@keyframes fade-up {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 </style>
