@@ -7,7 +7,7 @@
       <div class="ml-4 flex flex-col justify-between">
         <nuxt-link to="/" class="font-semibold">Chris Mitchell</nuxt-link>
         <div>
-          Principal Software Engineer, Architect @
+          Senior Principal Software Engineer, Architect @
           <a class="" href="www.rms.com" target="_blank">RMS</a>
         </div>
         <div class="text-xs">
