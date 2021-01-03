@@ -54,7 +54,7 @@ I prefer the latter. In essence, a component that decorates an input with consis
 
 **In Action:**
 
-![](https://miro.medium.com/max/700/1*Jph3nxva76qqGgw5Lr1KRg.gif)
+![](https://miro.medium.com/max/700/1*PqTN3woxeKxEMJ8FSXhBRg.gif)
 
 **Code Sandbox:**
 
