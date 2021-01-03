@@ -32,7 +32,7 @@ I prefer the latter. In essence, a component that decorates an input with consis
 
 **The Form:**
 
-- Wrap your input in the **FormGroup** component, which exposes the scoped slot values **invalid** and **errors**
+- Wrap **each input in your form** in the **FormGroup** component, which exposes the scoped slot values **invalid** and **errors**
 
 - Full control over how errors are displayed
 
@@ -54,13 +54,13 @@ I prefer the latter. In essence, a component that decorates an input with consis
 
 **In Action:**
 
-![](https://cdn-images-1.medium.com/max/2640/1*vTdskNT73AcHLDXYxrXAiA.gif)
+![](https://miro.medium.com/max/700/1*Jph3nxva76qqGgw5Lr1KRg.gif)
 
 **Code Sandbox:**
 
-<iframe src="https://codesandbox.io/embed/vue-template-1fn36?fontsize=14&hidenavigation=1&theme=dark&view=preview"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden; margin-bottom: 1rem"
-     title="Vue Template"
+<iframe src="https://codesandbox.io/embed/vuelidate-effortless-error-messaging-o7xfh?fontsize=14&hidenavigation=1&theme=dark"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="Vuelidate: Effortless Error Messaging"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
