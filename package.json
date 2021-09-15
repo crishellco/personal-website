@@ -1,7 +1,7 @@
 {
   "name": "personal-website",
   "version": "1.0.0",
-  "description": "Personal website of Chris Mitchell. Principal Engineer and Architect @ RMS.",
+  "description": "Personal website of Chris Mitchell. Principal Engineer and Architect @ Moody's.",
   "author": "Chris Mitchell",
   "private": true,
   "scripts": {
