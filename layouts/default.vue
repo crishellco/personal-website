@@ -7,10 +7,8 @@
       <div class="ml-4 flex flex-col justify-between">
         <nuxt-link to="/" class="font-semibold">Chris Mitchell</nuxt-link>
         <div>
-          Senior Principal Software Engineer, Architect @
-          <a class="" href="https://www.moodysanalytics.com/" target="_blank"
-            >Moody's Analytics</a
-          >
+          Principal Software Engineer, Architect @
+          <a class="" href="https://www.cruxdata.com/" target="_blank">Crux</a>
         </div>
         <div class="text-xs">
           <a target="_blank" href="http://github.com/crishellco">GitHub</a>
