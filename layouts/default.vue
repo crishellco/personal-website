@@ -7,7 +7,7 @@
       <div class="ml-4 flex flex-col justify-between">
         <nuxt-link to="/" class="font-semibold">Chris Mitchell</nuxt-link>
         <div>
-          Principal Software Engineer, Architect @
+          Director of Engineering, Architect @
           <a class="" href="https://www.cruxdata.com/" target="_blank">Crux</a>
         </div>
         <div class="text-xs">
