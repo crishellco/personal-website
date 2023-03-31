@@ -1,6 +1,6 @@
 <template>
   <section class="max-w-article pb-10">
-    <article class="mt-8">
+    <article>
       <h2 class="text-3xl font-semibold">{{ article.title }}</h2>
       <div class="mb-6 text-sm text-gray-700 flex items-center">
         <formatted-date :article="article" />
