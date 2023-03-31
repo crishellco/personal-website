@@ -4,7 +4,6 @@
       v-for="article in articles"
       :key="article.path"
       :article="article"
-      class="mt-8"
     />
   </section>
 </template>
